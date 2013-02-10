@@ -1,0 +1,6 @@
+public class Minesweeper{
+  /*So, what I want to do with this is make a square board that has bombs placed randomly through it
+   * When a user selects a square there are 2 options.
+   * 1. You die
+   * 2. You don't die.
+   * If you don't die, you 
