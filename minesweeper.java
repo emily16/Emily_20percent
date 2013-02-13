@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.Random;
-import java.awt.Color;
+import java.awt.Color; //I CAN CHANGE THE BOARD'S COLOR!
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -55,3 +55,31 @@ public class Minesweeper extends JPanel{
         buttons[i][j].setText(""); //Makes the button blank on the front so that you can't see if it is a bomb or not.
       }
     }
+    
+    bombs = new int[w][h]; //makes a board of bombs
+    numB = w*h*difficulty/40+1; //decided how many bombs to include based on difficulty level chosen
+    left=w*h-numB; //how many bombs are remaining
+    fillBombs(); //filling the board with teh correct bombs
+    fillRest(); //filling the rest of the board
+  }
+  
+  public void fillBombs(){ //filing the board with the bombs
+    Random r = new Random();
+    while(numB > 0){ 
+      int x = r.nextInt(w);
+      int y = r.nextInt(h);
+      if (bombs [x][y]==0){
+        bombs [x][y] = -1;
+        numB--;
+      }
+    }
+  }
+  
+  public void fillRest(){ //filling the rest of the board with empty squares
+    for(int i=0; i<w; i++){
+      for(int j=0; j<h; j++){
+        if(bombs[i][j]!=-1){
+          bombs[i][j]=numSurrounding(i,j);
+        }
+      }  
+      
